@@ -1,7 +1,7 @@
 ###download the AHN data
 ### 5m resoltion
 
-getwd()
+#getwd()
 #the x is now the code of the tile to download, (now for instance 68gz2, which is somewhere in south limburg)
 AHN = function (x)
 { 
@@ -20,36 +20,6 @@ for (i in 1:length(x))
           unzip(paste0("data/",x[i]), exdir="data_tiff")
           file.remove(paste0("data/",x[i]))
       } 
-
-# 
-# # Combine #
-# 
-# #list the tiffs
-# file_list <- list.files("data_tiff")
-# 
-# #combine them??? -->NOT WORKING YET
-# for (file in file_list)
-#   {
-#   
-#   # if the merged dataset doesn't exist, create it
-#   if (!exists("Combined_raster"))
-#     {
-#     Combined_raster <- read.asciigrid(file)
-#     }
-#   
-#   # if the merged dataset does exist, append to it
-#   if (exists("Combined_raster"))
-#     {
-#     temp_dataset <-read.asciigrid(file)
-#     dataset<-rbind(Combined_raster, temp_dataset)
-#     rm(temp_dataset)
-#     }
-#   
-#   }
-
-
-
-
 
 
 } 
