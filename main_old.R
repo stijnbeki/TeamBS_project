@@ -2,10 +2,9 @@
 ###Final Exercise###
 ###january 2017###
 
-setwd("//wurnet.nl/homes/beern001/My Documents/GeoScripting/FinalProjectTeamBS")
-getwd()
 #setwd("//wurnet.nl/homes/beern001/My Documents/GeoScripting/FinalProjectTeamBS")
-
+getwd()
+setwd("//wurnet.nl/homes/beern001/My Documents/GeoScripting/FinalProjectTeamBS")
 #clean workspace
 rm(list=ls())
 
@@ -15,7 +14,6 @@ install.packages("raster")
 install.packages("rgdal")
 install.packages("downloader")
 install.packages("readr")
-install.packages("sp")
 ...
 
 #import libraries#
@@ -23,7 +21,6 @@ library(raster)
 library(rgdal)
 library(downloader)
 library(readr)
-library(sp)
 ...
 
 
@@ -31,7 +28,6 @@ library(sp)
 source("R_func/AHN.R")
 source("R_func/Combine_ras.R")
 source("R_func/GWL_data.R")
-source("R_func/GWL_Read_Data.R")
 #do calc
 SouthLimburg = read.table("data/SouthLim_codes.txt",sep=",",header=FALSE,stringsAsFactors = FALSE)
 
@@ -40,7 +36,7 @@ tiffDownload = AHN(SouthLimburg)
  
 #cal function that combines the raster files.
 #--> as ##Variable##, enter the folder that needs to be combined/merged.
-Fin_SouLi_ras = Combine_ras("/data_tiff")
+SouLi_ras = Combine_ras("/data_tiff")
 #plot
 plot(SouLi_ras)  
 
@@ -49,11 +45,5 @@ plot(SouLi_ras)
 SouthLimDown <- read_file("data/SouthLim_GWL_download.txt")
 #download the files
 GWL_data(SouthLimDown[1])
-
-
-#process the raw Piezometer data and put in one file.
-GWL_list = list.files(path="GWL_South_Limburg/", pattern="*_1.csv")
-Fin_GWL_Data = GWL_Read_Data(GWL_list)
-
 
 
