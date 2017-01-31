@@ -1,11 +1,11 @@
-ToSpatialPDF = function(x)
+ToSpatialPDF = function(d,x,y)
 { 
-}
 
+d = as.data.frame(d)
+d[,x] = as.numeric(as.character(d[,x]))
+d[,y] = as.numeric(as.character(d[,y]))
 
+coordinates(d) = x:y
 
-cords = as.data.frame(Fin_GWL_Data[,c("x_value", "y_value")])
-attributes = as.data.frame(Fin_GWL_Data[,1:6])
-
-###Not working yet... Kut
-SpatialPointsGWL = SpatialPointsDataFrame(cords, attributes)
+return(d)
+} 
