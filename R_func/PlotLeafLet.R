@@ -11,7 +11,8 @@ m =    addMarkers(m,data = Points_LL,
                popup = ~as.character(round(Points_LL$Diff_Ras_Dino, digits =2)))
     #addPolygons(data=Polygon_LL, stroke = TRUE,  fill = TRUE) %>%
 m =    addTiles(m)
-  
+
+#this works if the file= "path" is not set to the M directory. (so for instance D drive)  
 #saveWidget(m, file="data/Points.html")
   
 return(m)

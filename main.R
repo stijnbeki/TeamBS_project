@@ -6,7 +6,6 @@
 ### vs groundwaterlevel data" ###
 #################################
 
-#the WD should be the folder where main.R is situated.
 
 ### ##  ##  ##  ##  ##  ##
 #
@@ -35,6 +34,8 @@
 # 1.Prep #
 ##########
 
+#the WorkingDirectory should be the folder where main.R is situated.
+#if this is not the starting WD--> change with: setwd("your_path")
 
 #clean workspace
 rm(list=ls())
@@ -144,7 +145,7 @@ nl_SL_RD_agg = aggregate(spTransform(PolygonLim, CRS("+proj=sterea +lat_0=52.156
 PointsClip = Clipfunc(nl_SL_RD_agg, Fin_GWL_Data)
 
 ##quick plot of the raster and point data (in RD)
-plot(Fin_SouLi_ras)
+plot(Fin_SouLi_ras, main = "Raw Data South limburg")
 plot(PointsClip, add=T, pch= 19, cex=0.3)
 plot(nl_SL_RD_agg, add=TRUE, fill=FALSE)
 
@@ -189,15 +190,14 @@ nl_Sl_RD_Muni_diff = DiffMuni(PointsClip_diff,nl_SL_RD)
 ###
 #this function plots the error per municipality (calculated in section 5)
 ###
-
 PlotSPplot(nl_Sl_RD_Muni_diff)
 
 
 ###
 #this plot contains all final information, in an interactive environment
 ###
-source("R_func/PlotLeafLet.R")
 PlotLeafLet(PointsClip_diff, nl_Sl_RD_Muni_diff)
+
 
 #####THE END#####
 ###TEAM BS (c)###
