@@ -48,6 +48,10 @@ install.packages("readr")
 install.packages("sp")
 install.packages("ggmap")
 install.packages("rgeos")
+install.packages("RColorBrewer")
+install.packages("leaflet")
+install.packages("classInt")
+install.packages("htmlwidgets")
 #...
 
 #import libraries#
@@ -58,6 +62,10 @@ library(readr)
 library(sp)
 library(ggmap)    # loads ggplot2 as well
 library(rgeos)
+library(RColorBrewer)
+library(leaflet)
+library(classInt)
+library(htmlwidgets)
 #...
 
 
@@ -72,6 +80,8 @@ source("R_func/DownPolyNL.R")
 source("R_func/Clipfunc.R")
 source("R_func/ExtraVal.R")
 source("R_func/DiffMuni.R")
+source("R_func/PlotSPplot.R")
+source("R_func/PlotLeafLet.R")
 #...
 
 
@@ -149,6 +159,7 @@ plot(nl_SL_RD_agg, add=TRUE, fill=FALSE)
 #Variables: The Raster file, the points file.
 PointsClip_diff = ExtraVal(Fin_SouLi_ras,PointsClip)
 
+    ##done in LATLON
 #GGplot requires lat/Lon coordinate system: therefore transform the coordinate systems of the Raster and Points
 #data is in RD_NEW-> reproject to Lon/lat, ##THIS PROJECTION TAKES A LONG TIME##
 LL_Ras  = projectRaster(Fin_SouLi_ras, crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0")
@@ -156,17 +167,37 @@ LL_Point = spTransform(PointsClip_diff, CRS("+proj=longlat +datum=WGS84"))
 
 #use this as input for the GGPLOT
 PlotggMap(LL_Ras,LL_Point)
-
+    ##
 
 
 ################
 #  5.ErrorMun  #
 ################
-
+###
 # Now all points contain a column that says how big the difference is.
 # This function calculates the mean per municipality for this and plots this.
 # variables: Points,muniBoundery
+###
+nl_Sl_RD_Muni_diff = DiffMuni(PointsClip_diff,nl_SL_RD)
 
-DiffMuni(PointsClip_diff,nl_SL_RD)
 
-##TEAM BS (c)##
+
+##########
+# 6.PLOT #
+##########
+
+###
+#this function plots the error per municipality (calculated in section 5)
+###
+
+PlotSPplot(nl_Sl_RD_Muni_diff)
+
+
+###
+#this plot contains all final information, in an interactive environment
+###
+source("R_func/PlotLeafLet.R")
+PlotLeafLet(PointsClip_diff, nl_Sl_RD_Muni_diff)
+
+#####THE END#####
+###TEAM BS (c)###
