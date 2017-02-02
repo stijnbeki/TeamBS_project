@@ -15,12 +15,6 @@ projection(Pointsclip_sl) = CRS("+proj=sterea +lat_0=52.15616055555555 +lon_0=5.
 Muni_Dif_fill = over(Muni,Pointsclip_sl, fn=mean)
 Muni@data$Diff_Ras_Dino = Muni_Dif_fill$Diff_Ras_Dino
 
-#Do a plot that shows the different municipality and the mean error per municipality.
-
 return(Muni)
  
-# colfunc <- colorRampPalette(c(brewer.pal(11, "BrBG")))
-# b= c(-3,-1,-.6,-.4,-.2,0,.2,.4,.6,1,3)
-# spplot(Muni, zcol = "Diff_Ras_Dino", breaks = b, col.regions= colfunc(30), scale = "none",main="Error per Municipality",  colorkey = list(b))
-
 } 
